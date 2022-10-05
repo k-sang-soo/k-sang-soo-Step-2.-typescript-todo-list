@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap');
@@ -115,17 +115,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     vertical-align: middle;
     resize: none;
-  }
-
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-  }
-
-  select::-ms-expand {
-    display: none;
   }
 
   button {

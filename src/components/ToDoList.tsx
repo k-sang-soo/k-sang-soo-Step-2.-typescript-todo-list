@@ -1,46 +1,60 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
-import CreateToDo from "./CreateToDo";
-import { toDoState } from "../atoms";
-import ToDo from "./ToDo";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
+import CreateToDo from './CreateToDo';
+import { categoryState, toDoSelector, toDoState } from '../atoms';
+import ToDo from './ToDo';
 
 interface IFormData {
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  Username: string;
-  Password: string;
-  PasswordConfirm: string;
-  extraError?: string;
+    Email: string;
+    FirstName: string;
+    LastName: string;
+    Username: string;
+    Password: string;
+    PasswordConfirm: string;
+    extraError?: string;
 }
 
 function ToDoList() {
-  const toDos = useRecoilValue(toDoState);
-  console.log(toDos);
-  return (
-    <div style={{ padding: "24px" }}>
-      <h1
-        style={{
-          fontSize: "32px",
-          fontWeight: "bold",
-          marginBottom: "20px",
-          paddingBottom: "8px",
-          borderBottom: "1px solid #FFF",
-        }}
-      >
-        To Dos
-      </h1>
-      <CreateToDo />
-      <ul>
-        {toDos.map((toDo) => (
-          // {...todo} 처럼 쓸 수 있는 것은 todo가 IToDoData 와 같은 key: value 를 가지고 있기 때문
-          // props 이름이 서로 달랐다면 작동이 되지 않는다.
-          <ToDo key={toDo.id} {...toDo} />
-        ))}
-      </ul>
-    </div>
-  );
+    // 배열 안의 배열을 선택하려면 이렇게 배열을 열고 순서대로 이름을 지정하면 된다.
+    const toDos = useRecoilValue(toDoSelector);
+    const [category, setCategory] = useRecoilState(categoryState);
+    const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
+        const {
+            currentTarget: { value },
+        } = event;
+        setCategory(value);
+    };
+    return (
+        <div style={{ padding: '24px' }}>
+            <h1
+                style={{
+                    fontSize: '32px',
+                    fontWeight: 'bold',
+                    marginBottom: '16px',
+                    paddingBottom: '8px',
+                    borderBottom: '1px solid #FFF',
+                }}
+            >
+                To Dos
+            </h1>
+            <CreateToDo />
+            <select onInput={onInput} value={category} style={{ width: '200px', marginTop: '16px', padding: '4px', border: '1px solid #FFF', backgroundColor: 'transparent', outline: 'none' }}>
+                <option value="TO_DO" style={{ color: '#000' }}>
+                    ToDo
+                </option>
+                <option value="DOING" style={{ color: '#000' }}>
+                    Doing
+                </option>
+                <option value="DONE" style={{ color: '#000' }}>
+                    Done
+                </option>
+            </select>
+            {toDos.map((toDo) => (
+                <ToDo key={toDo.id} {...toDo} />
+            ))}
+        </div>
+    );
 }
 
 // 회원 가입 form 예시
