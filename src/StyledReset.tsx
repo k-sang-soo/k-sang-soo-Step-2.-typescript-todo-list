@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
+    color: ${(props) => props.theme.textColor};
   }
 
   :before, :after {
@@ -41,7 +42,6 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
     background-color: ${(props) => props.theme.bgColor};
-    color: ${(props) => props.theme.textColor};
   }
 
   [hidden], hr {
@@ -97,6 +97,7 @@ export const GlobalStyle = createGlobalStyle`
   input {
     border: 0px;
     vertical-align: middle;
+    outline: none;
     box-sizing: border-box;
   }
 
@@ -107,6 +108,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-transition: background-color 5000s;
     transition: background-color 5000s;
     -webkit-text-fill-color: #fff !important;
+    border: 0;
   }
 
   textarea {
