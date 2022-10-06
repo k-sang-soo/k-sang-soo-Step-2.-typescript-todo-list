@@ -20,6 +20,10 @@ function ToDoList() {
     const toDos = useRecoilValue(toDoSelector);
     const allToDos = useRecoilValue(toDoState);
     const [category, setCategory] = useRecoilState(categoryState);
+    const allToDosString = JSON.stringify(allToDos);
+    const setStroage = window.localStorage.setItem('toDos', allToDosString);
+    const getStroage = window.localStorage.getItem('toDos');
+    const getStroageObj = getStroage && JSON.parse(getStroage);
     const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
         const {
             currentTarget: { value },
@@ -27,8 +31,9 @@ function ToDoList() {
         setCategory(value as any);
     };
 
-    console.log(toDos);
-    console.log(category);
+    console.log('toDos', toDos);
+    console.log('getStroage', getStroage);
+    console.log('getStroageObj', getStroageObj);
 
     return (
         <div style={{ padding: '24px' }}>
