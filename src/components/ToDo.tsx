@@ -1,5 +1,5 @@
 import React from "react";
-import { IToDoData, toDoState } from "../atoms";
+import { Categories, IToDoData, toDoState } from "../atoms";
 import { useSetRecoilState } from "recoil";
 import { log } from "util";
 
@@ -13,28 +13,53 @@ function ToDo({ text, category, id }: IToDoData) {
     setToDos((oldToDos) => {
       console.log("oldToDos", oldToDos);
       return oldToDos.map((toDo) =>
-        toDo.id === id
-          ? { ...toDo, category: name as IToDoData["category"] }
-          : toDo
+        toDo.id === id ? { ...toDo, category: name as any } : toDo
       );
     });
   };
   return (
-    <li>
-      <span>{text}</span>
+    <li style={{ marginTop: "8px" }}>
+      <span style={{ marginRight: "8px" }}>{text}</span>
 
-      {category !== "DOING" && (
-        <button name={"DOING"} onClick={onClick}>
+      {category !== Categories.TO_DO && (
+        <button
+          name={Categories.TO_DO}
+          onClick={onClick}
+          style={{
+            marginRight: "8px",
+            padding: "4px",
+            border: "1px solid #FFF",
+            borderRadius: "4px",
+          }}
+        >
           Doing
         </button>
       )}
-      {category !== "TO_DO" && (
-        <button name={"TO_DO"} onClick={onClick}>
+      {category !== Categories.DOING && (
+        <button
+          name={Categories.DOING}
+          onClick={onClick}
+          style={{
+            marginRight: "8px",
+            padding: "4px",
+            border: "1px solid #FFF",
+            borderRadius: "4px",
+          }}
+        >
           To Do
         </button>
       )}
-      {category !== "DONE" && (
-        <button name={"DONE"} onClick={onClick}>
+      {category !== Categories.DONE && (
+        <button
+          name={Categories.DONE}
+          onClick={onClick}
+          style={{
+            marginRight: "8px",
+            padding: "4px",
+            border: "1px solid #FFF",
+            borderRadius: "4px",
+          }}
+        >
           Done
         </button>
       )}
