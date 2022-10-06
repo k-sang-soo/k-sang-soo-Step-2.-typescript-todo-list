@@ -18,6 +18,7 @@ interface IFormData {
 function ToDoList() {
     // 배열 안의 배열을 선택하려면 이렇게 배열을 열고 순서대로 이름을 지정하면 된다.
     const toDos = useRecoilValue(toDoSelector);
+    const allToDos = useRecoilValue(toDoState);
     const [category, setCategory] = useRecoilState(categoryState);
     const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
         const {
@@ -25,6 +26,9 @@ function ToDoList() {
         } = event;
         setCategory(value as any);
     };
+
+    console.log(toDos);
+    console.log(category);
 
     return (
         <div style={{ padding: '24px' }}>
@@ -53,13 +57,13 @@ function ToDoList() {
                 }}
             >
                 <option value={Categories.TO_DO} style={{ color: '#000' }}>
-                    ToDo
+                    ToDo ({allToDos.filter((toDo) => toDo.category === Categories.TO_DO).length})
                 </option>
                 <option value={Categories.DOING} style={{ color: '#000' }}>
-                    Doing
+                    Doing ({allToDos.filter((toDo) => toDo.category === Categories.DOING).length})
                 </option>
                 <option value={Categories.DONE} style={{ color: '#000' }}>
-                    Done
+                    Done ({allToDos.filter((toDo) => toDo.category === Categories.DONE).length})
                 </option>
             </select>
             {toDos.map((toDo) => (
