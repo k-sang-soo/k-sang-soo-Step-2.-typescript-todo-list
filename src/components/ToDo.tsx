@@ -17,6 +17,14 @@ function ToDo({ text, category, id }: IToDoData) {
       );
     });
   };
+
+  const DeleteToDo = () => {
+    setToDos((oldToDos) => {
+      console.log("oldToDos", oldToDos);
+      return oldToDos;
+    });
+  };
+
   return (
     <li style={{ marginTop: "8px" }}>
       <span style={{ marginRight: "8px" }}>{text}</span>
@@ -63,6 +71,17 @@ function ToDo({ text, category, id }: IToDoData) {
           Done
         </button>
       )}
+      <button
+        onClick={DeleteToDo}
+        style={{
+          marginRight: "8px",
+          padding: "4px",
+          border: "1px solid #FFF",
+          borderRadius: "4px",
+        }}
+      >
+        Delete
+      </button>
     </li>
   );
 }
