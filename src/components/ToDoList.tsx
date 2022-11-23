@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import CreateToDo from './CreateToDo';
-import { Categories, categoryState, IToDoData, toDoSelector, toDoState, toDoStorage } from '../atoms';
+import { Categories, categoryState, toDoSelector, toDoState, toDoStorage } from '../atoms';
 import ToDo from './ToDo';
 
 interface IFormData {
